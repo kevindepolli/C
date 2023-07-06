@@ -6,7 +6,7 @@
 #include "tratamento.h"
 
 void main(){
-    struct aluno al, al2;
+    struct aluno al, resultado;
 
     al.matricula = 1;
     strcpy(al.nome,"Guilherme");
@@ -15,10 +15,27 @@ void main(){
     Hash *ha;
     ha = criaHash(30);
 
-    int pos, tam = 30;
+    int pos, buscado, tam = 30;
 
-    pos = chaveDivisao(al.matricula, tam);
-    insereHash_SemColisao(ha, al, pos);
+    pos = chaveDivisao(al.matricula, ha->TABLE_SIZE); //hashing
+    insereHash(ha, al, pos);
+
+    buscado = chaveDivisao(al.matricula, ha->TABLE_SIZE); //hashing
+    if(buscaHash(ha, &resultado, buscado)) {
+        printf("Nome:");
+        puts(resultado.nome);
+    }
+
+    pos = chaveDivisao(al.matricula, ha->TABLE_SIZE); //hashing
+    pos = sondagemLinear(pos, ha); //tratamento
+    insereHash(ha, al, pos);
+
+    pos = chaveDivisao(al.matricula, ha->TABLE_SIZE); //hashing
+    pos = sondagemLinear(pos, ha); //tratamento
+    if(buscaHash(ha, &resultado, buscado)) {
+        printf("Nome:");
+        puts(resultado.nome);
+    }
 
     liberaHash(ha);
 }
