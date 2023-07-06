@@ -1,3 +1,6 @@
+#ifndef  TABELAHASH_H
+#define  TABELAHASH_H
+
 struct aluno {
 int matricula;
 char nome[30];
@@ -13,3 +16,5 @@ int insereHash_SemColisao(Hash* ha, struct aluno al);
 int buscaHash_SemColisao(Hash* ha, int mat, struct aluno *al);
 int insereHash_EnderAberto(Hash* ha, struct aluno al);
 int buscaHash_EnderAberto(Hash* ha, int mat, struct aluno *al);
+
+#endif

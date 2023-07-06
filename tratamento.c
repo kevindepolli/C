@@ -1,4 +1,5 @@
 #include "tratamento.h"
+#include "hashing.h"
 
 
 //Sondagem Linear
