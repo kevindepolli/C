@@ -1,7 +1,9 @@
 //Arquivo TabelaHash.c
 #include <stdlib.h>
 #include <string.h>
-#include "TabelaHash.h"
+#include "tabelaHash.h"
+#include "hashing.h"
+#include "tratamento.h"
 //definição do tipo hash
 struct hash {
     int qtd, TABLE_SIZE;
@@ -36,17 +38,6 @@ void liberaHash(Hash* ha){
         free(ha->itens);
         free(ha);
     }
-}
-
-int chaveDivisao(int chave, int TABLE_SIZE) {
-    return (chave & 0x7FFFFFFF) % TABLE_SIZE;
-}
-
-int chaveMultiplicacao(int chave, int TABLE_SIZE) {
-    float A = 0.6180339887; //constante: 0 < A < 1
-    float val = chave * A;
-    val = val - (int) val;
-    return (int) (TABLE_SIZE * val);
 }
 
 //Tratando string
@@ -87,23 +78,6 @@ int buscaHash_SemColisao(Hash* ha, int mat, struct aluno *al){
     *al = *(ha->itens[pos]);
 
     return 1;
-}
-
-//Sondagem Linear
-int sondagemLinear(int pos, int i, int TABLE_SIZE) {
-    return ((pos + i) & 0x7FFFFFFF) % TABLE_SIZE;
-}
-
-//Sondagem Quadrática
-int sondagemQuadratica(int pos, int i, int TABLE_SIZE) {
-    pos = pos + 2 * i + 5 * i * i;
-    return (pos & 0x7FFFFFFF) % TABLE_SIZE;
-}
-
-//Duplo Hash
-int duploHash(int H1, int chave, int i, int TABLE_SIZE) {
-    int H2 = chaveDivisao(chave, TABLE_SIZE -1) + 1;
-    return ((H1 + i * H2) & 0x7FFFFFFF) % TABLE_SIZE;
 }
 
 //Inserção com tratamento de colisão
