@@ -50,12 +50,10 @@ int valorString(char *str) {
 }
 
 //Inserção sem tratamento de colisão
-int insereHash_SemColisao(Hash* ha, struct aluno al){
-    if (ha == NULL || ha->qtd == ha->TABLE_SIZE)
+int insereHash_SemColisao(Hash* ha, struct aluno al, int pos){
+    if (ha == NULL || ha->qtd == ha->TABLE_SIZE || pos >= ha->TABLE_SIZE)
         return 0;
     int chave = al.matricula;
-    //int chave = valorString(al.nome);
-    int pos = chaveDivisao(chave, ha->TABLE_SIZE);
     struct aluno *novo;
     novo = (struct aluno*)malloc(sizeof(struct aluno));
     if (novo == NULL)
@@ -67,11 +65,9 @@ int insereHash_SemColisao(Hash* ha, struct aluno al){
 }
 
 //Busca sem tratamento de colisão
-int buscaHash_SemColisao(Hash* ha, int mat, struct aluno *al){
-    if (ha == NULL)
+int buscaHash_SemColisao(Hash* ha, int mat, struct aluno *al, int pos){
+    if (ha == NULL || pos >= ha->TABLE_SIZE)
         return 0;
-
-    int pos = chaveDivisao(mat, ha->TABLE_SIZE);
     
     if (ha->itens[pos] == NULL)
         return 0;
@@ -81,13 +77,12 @@ int buscaHash_SemColisao(Hash* ha, int mat, struct aluno *al){
 }
 
 //Inserção com tratamento de colisão
-int insereHash_EnderAberto(Hash* ha, struct aluno al){
-    if (ha == NULL || ha->qtd == ha->TABLE_SIZE)
+int insereHash_EnderAberto(Hash* ha, struct aluno al, int pos){
+    if (ha == NULL || ha->qtd == ha->TABLE_SIZE || pos >= ha->TABLE_SIZE)
         return 0;
 
     int chave = al.matricula;
-    int i, pos, newPos;
-    pos = chaveDivisao(chave, ha->TABLE_SIZE);
+    int i, newPos;
 
     for (i=0; i < ha->TABLE_SIZE; i++) {
         newPos = sondagemLinear(pos, i, ha->TABLE_SIZE);
@@ -107,11 +102,10 @@ int insereHash_EnderAberto(Hash* ha, struct aluno al){
 }
 
 //Busca com tratamento de colisão
-int buscaHash_EnderAberto(Hash* ha, int mat, struct aluno *al){
-    if (ha == NULL)
+int buscaHash_EnderAberto(Hash* ha, int mat, struct aluno *al, int pos){
+    if (ha == NULL || pos >= ha->TABLE_SIZE)
         return 0;
-    int i, pos, newPos;
-    pos = chaveDivisao(mat, ha->TABLE_SIZE);
+    int i, newPos;
     for (i=0; i < ha->TABLE_SIZE; i++) {
         newPos = sondagemLinear(pos, i, ha->TABLE_SIZE);
         if (ha->itens[newPos] == NULL)
