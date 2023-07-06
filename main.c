@@ -14,7 +14,7 @@ int main(){
     Hash *ha;
     ha = criaHash(1427);
 
-    int x = insereHash_SemColisao(ha, al);
+    if(insereHash_SemColisao(ha, al)) printf("Aluno Inserido com sucesso!");
 
     int busca;
     printf("Matricula para busca: ");
@@ -26,10 +26,10 @@ int main(){
     }
 
 
+    if(insereHash_EnderAberto(ha, al)) printf("Aluno Inserido com sucesso!");
 
-    int x = insereHash_EnderAberto(ha, al);
+    if(buscaHash_EnderAberto(ha, al.matricula, &al)) printf("Aluno encontrado com sucesso!");
 
-    int x = buscaHash_EnderAberto(ha, mat, &al);
     
     liberaHash(ha);
     return 0;
