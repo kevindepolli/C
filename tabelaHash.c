@@ -1,7 +1,8 @@
 //Arquivo TabelaHash.c
 #include <stdlib.h>
 #include <string.h>
-#include "TabelaHash.h"
+#include "tabelaHash.h"
+
 //definição do tipo hash
 struct hash {
     int qtd, TABLE_SIZE;

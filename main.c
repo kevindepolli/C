@@ -3,6 +3,8 @@
 #include "tabelaHash.h"
 
 int main(){
+    int busca, mat, x;
+
     struct aluno al, al2;
     printf("informe a matricula: ");
     scanf("%d", &al.matricula);
@@ -16,7 +18,6 @@ int main(){
 
     int x = insereHash_SemColisao(ha, al);
 
-    int busca;
     printf("Matricula para busca: ");
     scanf("%d", &busca);
     int resultado = buscaHash_SemColisao(ha, busca, &al2);
@@ -26,10 +27,9 @@ int main(){
     }
 
 
+    x = insereHash_EnderAberto(ha, al);
 
-    int x = insereHash_EnderAberto(ha, al);
-
-    int x = buscaHash_EnderAberto(ha, mat, &al);
+    x = buscaHash_EnderAberto(ha, mat, &al);
     
     liberaHash(ha);
     return 0;
