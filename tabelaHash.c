@@ -5,7 +5,6 @@
 #include "hashing.h"
 #include "tratamento.h"
 
-
 Hash* criaHash(int TABLE_SIZE){
     Hash *ha;
     ha = (Hash*) malloc(sizeof(Hash));

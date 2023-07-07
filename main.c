@@ -6,6 +6,8 @@
 #include "tratamento.h"
 
 int main(){
+    int busca, mat, x;
+
     struct aluno al, al2;
 
     al.matricula = 1;
@@ -17,7 +19,6 @@ int main(){
 
     if(insereHash_SemColisao(ha, al)) printf("Aluno Inserido com sucesso!\n");
 
-    int busca;
     printf("Matricula para busca: ");
     scanf("%d", &busca);
     int resultado = buscaHash_SemColisao(ha, busca, &al2);
@@ -26,11 +27,9 @@ int main(){
         printf("Encontrou o aluno %s\n", al2.nome);
     }
 
-
     if(insereHash_EnderAberto(ha, al)) printf("Aluno Inserido com sucesso!\n");
 
     if(buscaHash_EnderAberto(ha, al.matricula, &al)) printf("Aluno encontrado com sucesso!\n");
-
     
     liberaHash(ha);
     return 0;
